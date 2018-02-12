@@ -1,0 +1,17 @@
+{
+  "name": "follow-devices",
+  "version": "1.0.0",
+  "description": "Associates devices with rooms",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@jhanssen/options": "^1.0.4",
+    "app-root-path": "^2.0.1",
+    "mdns": "^2.3.4",
+    "mqtt": "^2.15.2"
+  }
+}
