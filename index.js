@@ -1,10 +1,12 @@
-/*global require*/
+/*global require,process*/
 
 const mqtt = require("mqtt");
 const path = require("path");
 const fs = require("fs");
+const mdns = require("mdns");
 const appPath = require("app-root-path");
-const options = require("@jhanssen/options")("devices");
+const argv = require("minimist")(process.argv.slice(2));
+const options = require("@jhanssen/options")("devices", argv);
 
 const devices = {};
 
@@ -46,6 +48,16 @@ function sendDevices(client) {
 }
 
 (function() {
+    if ("list" in argv || "devices" in argv) {
+        const browser = mdns.createBrowser(mdns.tcp("googlecast"));
+        browser.on("serviceUp", service => {
+            //console.log(service);
+            console.log(`Cast device ${service.name} at ${service.addresses[0]}:${service.port}`);
+        });
+        browser.start();
+        return;
+    }
+
     const url = options("url");
     const opts = options.json("options", {});
     const addOption = name => {
