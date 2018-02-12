@@ -67,6 +67,10 @@ function sendDevices(client) {
     };
     addOption("username");
     addOption("password");
+    if (!url) {
+        console.error("need a mqtt url");
+        return;
+    }
 
     const client = mqtt.connect(url, opts);
 
